@@ -2,8 +2,9 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connect } from "mongoose";
 import connectDB from "./utils/db.js";
+import userRoutes from "./routes/user.routes.js";
+
 dotenv.config({});
 
 const app = express();
@@ -20,6 +21,11 @@ const corsOption = {
 app.use(cors(corsOption));
 
 const PORT = process.env.PORT || 3000;
+
+//api 
+app.use("/api/v1/user", userRoutes);
+
+
 app.listen(PORT, () => {
   connectDB()
   console.log(`server running at port ${PORT}`);
