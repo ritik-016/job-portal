@@ -10,7 +10,7 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    company: {
+    companyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
       required: true,
@@ -22,10 +22,14 @@ const jobSchema = new mongoose.Schema(
     employmentType: {
       type: String,
       enum: ["full-time", "part-time", "internship", "contract"],
-      required: true,
+      required: true
     },
     salaryRange: {
       type: [Number], // e.g., [50000, 70000]
+      required: true, 
+    },
+    experienceLevel: {
+      type: String,
       required: true,
     },
     requirements: [{
@@ -38,7 +42,6 @@ const jobSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
     applicants: [{
       type: mongoose.Schema.Types.ObjectId,
@@ -50,4 +53,6 @@ const jobSchema = new mongoose.Schema(
   }
 );
 
-export const Job = mongoose.model("Job", jobSchema);
+const Job = mongoose.model("Job", jobSchema);
+
+export default Job;
