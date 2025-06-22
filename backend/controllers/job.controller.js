@@ -3,10 +3,10 @@ import Job from "../models/job.model.js";
 //Admin can post a job
 export const postJob = async (req, res) => {
     try {
-        const { title, description, companyId, location, requirements, salary, jobType, experience, position } = req.body;
+        const { title, description, companyId, location, requirements, salaryRange, jobType, experienceLevel, position } = req.body;
         const userId = req.id;
 
-        if(!title || !description || !companyId || !location || !requirements || !salary || !jobType || !experience || !position) {
+        if(!title || !description || !companyId || !location || !requirements || !salaryRange  || !experienceLevel || !position) {
             return res.status(400).json({
                 message: "All fields are required",
                 success: false
@@ -15,12 +15,11 @@ export const postJob = async (req, res) => {
         const job = await Job.create({
             title,
             description,
-            comapny: companyId,
+            companyId,
             location,
             requirements: requirements.split(","),
-            salary: Number(salary),
-            jobType,
-            experienceLevel: experience,
+            salaryRange: Number(salaryRange),
+            experienceLevel,
             position,
             createdBy: userId,
         });
@@ -44,7 +43,9 @@ export const getAllJobs = async (req, res) => {
                 {description:{ $regex: keywords, $options: "i" }}
             ]
         };
-        const jobs = await Job.find(query);
+        const jobs = await Job.find(query).populate({
+            path: "companyId",
+        }).sort({ createdAt: -1 });
         if(!jobs){
             return res.status(404).json({
                 message: "No jobs found",
@@ -63,7 +64,7 @@ export const getAllJobs = async (req, res) => {
 
 export const getJobById = async (req, res) => {
     try {
-        const jobId = req.parama.id;
+        const jobId = req.params.id;
         const job = await Job.findById(jobId);
         if(!job){
             return res.status(404).json({
