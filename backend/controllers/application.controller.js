@@ -77,7 +77,14 @@ export const getAppliedJobs = async (req, res) => {
 
 export const getApplications = async (req, res) => {
     try {
-        
+        const jobId = req.params;
+        const job = await Job.findById(jobId).populate({
+            path: 'applicants',
+            options: { sort: { createdAt: -1 } },
+            populate: {
+                path: 'application',
+            }
+        })
     } catch (error) {
         console.log(error);
     }
