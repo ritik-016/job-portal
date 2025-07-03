@@ -1,6 +1,7 @@
 import React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Avatar, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   return (
@@ -42,6 +43,9 @@ const Navbar = () => {
                       Lorem ipsum dolor sit.
                     </p>
                   </div>
+                </div>
+                <div>
+                  <Button >View Profile</Button>
                 </div>
               </PopoverContent>
             </Popover>
