@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import Navbar from './components/shared/Navbar'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/auth/login'
 import Signup from './components/auth/signup'
