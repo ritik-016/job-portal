@@ -2,8 +2,9 @@ import React from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { RadioGroup} from "../ui/radio-group";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -62,7 +63,7 @@ const Signup = () => {
             </div>
           </div>
           <Button type="submit" className="w-full my-4">Signup</Button>
-          <span>Already have an account? <Link to="/login" className="text-blue-500">Login</Link></span>
+          <span className="text-sm">Already have an account? <Link to="/login" className="text-blue-500">Login</Link></span>
         </form>
       </div>
     </div>
