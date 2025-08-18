@@ -2,7 +2,7 @@ import React, { use } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { RadioGroup} from "../ui/radio-group";
+import { RadioGroup } from "../ui/radio-group";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
@@ -10,25 +10,25 @@ const Login = () => {
   const [input, setInput] = useState({
     fullname: "",
     email: "",
+    phoneNumber: "",
     password: "",
     role: "",
-    password: "",
-    file: ""
+    file: "",
   });
 
   const changeEventHandler = (e) => {
     setInput({
       ...input,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
   const changeFileHandler = (e) => {
     setInput({
       ...input,
-      file: e.target.files?.[0]
+      file: e.target.files?.[0],
     });
-  }
+  };
 
   return (
     <div>
@@ -70,15 +70,18 @@ const Login = () => {
             </RadioGroup>
             <div className="flex items-center gap-2">
               <Label>Profile</Label>
-              <Input 
-                className="cursor-pointer"
-                type="file"
-                accept="image/*"
-              />
+              <Input className="cursor-pointer" type="file" accept="image/*" />
             </div>
           </div>
-          <Button type="submit" className="w-full my-4">Login</Button>
-          <span className="text-sm">Don't have an account? <Link to="/signup" className="text-blue-500">Signup</Link></span>
+          <Button type="submit" className="w-full my-4">
+            Login
+          </Button>
+          <span className="text-sm">
+            Don't have an account?{" "}
+            <Link to="/signup" className="text-blue-500">
+              Signup
+            </Link>
+          </span>
         </form>
       </div>
     </div>
