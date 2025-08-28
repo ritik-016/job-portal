@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -8,12 +8,9 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   const [input, setInput] = useState({
-    fullname: "",
     email: "",
-    phoneNumber: "",
     password: "",
     role: "",
-    file: "",
   });
 
   const changeEventHandler = (e) => {
@@ -23,11 +20,10 @@ const Login = () => {
     });
   };
 
-  const changeFileHandler = (e) => {
-    setInput({
-      ...input,
-      file: e.target.files?.[0],
-    });
+
+   const submitHandler = async (e) => {
+    e.preventDefault();
+    console.log(input);
   };
 
   return (
@@ -35,17 +31,29 @@ const Login = () => {
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
-          action=""
+          onSubmit={submitHandler}
           className="w-1/2  border border-gray-200 rounded-md p-4 my-10"
         >
           <h1 className="font-bold text-xl mb-5">Login</h1>
           <div className="my-2">
             <Label className="my-2">Email</Label>
-            <Input type="email" placeholder="Enter your email" />
+            <Input
+              type="email"
+              value={input.email}
+              name="email"
+              onChange={changeEventHandler}
+              placeholder="Enter your email"
+            />
           </div>
           <div className="my-2">
             <Label className="my-2">Password</Label>
-            <Input type="password" placeholder="Enter your password" />
+            <Input
+              type="password"
+              value={input.password}
+              name="password"
+              onChange={changeEventHandler}
+              placeholder="Enter your password"
+            />{" "}
           </div>
           <div className="flex items-center justify-between">
             <RadioGroup className="flex items-center gap-4 my-5">
@@ -54,6 +62,8 @@ const Login = () => {
                   type="radio"
                   name="role"
                   value="student"
+                  checked={input.role === "student"}
+                  onChange={changeEventHandler}
                   className="cursor-pointer"
                 />
                 <Label htmlFor="r1">Student</Label>
@@ -63,15 +73,13 @@ const Login = () => {
                   type="radio"
                   name="role"
                   value="recruiter"
+                  checked={input.role === "recruiter"}
+                  onChange={changeEventHandler}
                   className="cursor-pointer"
                 />
                 <Label htmlFor="r2">Recruiter</Label>
               </div>
-            </RadioGroup>
-            <div className="flex items-center gap-2">
-              <Label>Profile</Label>
-              <Input className="cursor-pointer" type="file" accept="image/*" />
-            </div>
+            </RadioGroup>              
           </div>
           <Button type="submit" className="w-full my-4">
             Login
